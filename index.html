@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/f7b186c8cb.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-4 left-container">
+            <br />
+            <form class="search col-9" id="search-form">
+              <label>Today in</label>
+              <div class="input-group mb-3">
+                <input
+                  type="search"
+                  name="search-box"
+                  id="search-box"
+                  class="form-control input-group mb-3"
+                  placeholder="Search for places"
+                  width="50%"
+                  autofocus
+                />
+                <div class="input-group-append">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="current-location-button"
+                  >
+                    <i class="fa-solid fa-location-dot"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="today-body">
+              <h6 id="today-date">Today, Monday 1st August</h6>
+              <h4>In <span id="current-city">Guayaquil</span></h4>
+              <br />
+              <img src="images/day.svg" alt="sun icon" width="30%" />
+              <br />
+              <div class="row today-weather-info">
+                <div class="col">
+                  <h3 class="today-temp" id="today-degrees">22 °C</h3>
+                </div>
+                <div class="col weather-options">
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic radio toggle button group"
+                  >
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="btnradio"
+                      id="btnradio1"
+                      autocomplete="off"
+                      checked
+                    />
+                    <label class="btn btn-outline-primary" for="btnradio1"
+                      >°C</label
+                    >
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="btnradio"
+                      id="btnradio2"
+                      autocomplete="off"
+                    />
+                    <label class="btn btn-outline-primary" for="btnradio2"
+                      >°F</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row today-min-max">
+                <div class="col today-min">
+                  <p><strong>Min</strong> <span id="min-temp">21</span>°C</p>
+                </div>
+                <div class="col today-max">
+                  <p><strong>Max</strong> <span id="max-temp">38</span>°C</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-8 right-container">
+            <div class="row">
+              <h5 class="weeks-title">This Week</h5>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img
+                        src="images/cloudy-weather.svg"
+                        alt="cloudy icon"
+                        width="50%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">21°C | 32°C</p>
+                    </div>
+                  </div>
+                  <p class="card-text weeks-day">
+                    <small class="text-muted">Tue, 2 Aug</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img
+                        src="images/sun-behind-cloud.svg"
+                        alt="sun cloud icon"
+                        width="50%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">23°C | 34°C</p>
+                    </div>
+                  </div>
+                  <p class="card-text weeks-day">
+                    <small class="text-muted">Wed, 3 Aug</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img src="images/rain.svg" alt="rain icon" width="50%" />
+                      <hr />
+                      <p class="card-text weather-temp">24°C | 30°C</p>
+                    </div>
+                  </div>
+                  <p class="card-text weeks-day">
+                    <small class="text-muted">Thu, 4 Aug</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img src="images/sun.svg" alt="sun icon" width="50%" />
+                      <hr />
+                      <p class="card-text weather-temp">27°C | 33°C</p>
+                    </div>
+                  </div>
+                  <p class="card-text weeks-day">
+                    <small class="text-muted">Fri, 5 Aug</small>
+                  </p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <img
+                        src="images/sun-behind-cloud.svg"
+                        alt="sun cloud icon"
+                        width="50%"
+                      />
+                      <hr />
+                      <p class="card-text weather-temp">25°C | 36°C</p>
+                    </div>
+                  </div>
+                  <p class="card-text weeks-day">
+                    <small class="text-muted">Sat, 6 Aug</small>
+                  </p>
+                </div>
+              </div>
+              <h5 class="weeks-title">Today's highlights</h5>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weather-highlights">Sunrise</p>
+                      <img src="images/sunrise.svg" alt="sunrise" width="50%" />
+                      <hr />
+                      <p class="card-text weather-fact" id="sunrise">06:24</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weather-highlights">Sunset</p>
+                      <img src="images/sunset.svg" alt="sunset" width="50%" />
+                      <hr />
+                      <p class="card-text weather-fact" id="sunset">18:26</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weather-highlights">RealFeel</p>
+                      <img
+                        src="images/high-temperature.svg"
+                        alt="high-temperature"
+                        width="50%"
+                      />
+                      <hr />
+                      <p class="card-text weather-fact">
+                        <span id="real-feel">9</span>°C
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weather-highlights">Humidity</p>
+                      <img
+                        src="images/humidity.svg"
+                        alt="humidity"
+                        width="50%"
+                      />
+                      <hr />
+                      <p class="card-text weather-fact">
+                        <span id="humidity">63</span>%
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <p class="card-text weather-highlights">Wind</p>
+                      <img src="images/wind.svg" alt="wind" width="50%" />
+                      <hr />
+                      <p class="card-text weather-fact">
+                        <span id="wind-speed">3</span> m/s
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="coder">
+      Coded by
+      <a href="https://www.linkedin.com/in/mariagracialg/">Maria Gracia</a> |
+      Icons from <a href="https://iconscout.com/">IconScout</a>
+    </p>
+    <script src="script.js"></script>
+  </body>
+</html>

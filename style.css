@@ -1,0 +1,86 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.search {
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.left-container {
+  padding: 10px;
+}
+.right-container {
+  padding: 20px;
+  background: rgba(227, 227, 227, 0.252);
+}
+.today-body {
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+.today-weather-info {
+  margin-top: 50px;
+}
+.today-temp {
+  text-align: right;
+  font-size: 36px;
+}
+.weather-options {
+  text-align: left;
+}
+.today-min-max {
+  margin-top: 40px;
+}
+.today-min {
+  text-align: right;
+}
+.today-max {
+  text-align: left;
+}
+.weather-icon {
+  font-size: 40px;
+}
+.weeks-title {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+.weeks-day {
+  text-align: center;
+  margin-top: 10px;
+}
+.weather-temp {
+  font-size: 14px;
+}
+.weather-fact {
+  font-size: 20px;
+}
+
+.weather-highlights {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.card {
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgb(205, 204, 204);
+}
+.coder {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#current-location-button {
+  margin-left: 10px;
+}
+
+.card-body {
+  padding-top: 15px;
+  padding-right: 3px;
+  padding-bottom: 15px;
+  padding-left: 3px;
+}
