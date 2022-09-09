@@ -88,3 +88,9 @@ body {
   padding-bottom: 15px;
   padding-left: 3px;
 }
+
+#today-temp-description {
+  padding-top: 10px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
