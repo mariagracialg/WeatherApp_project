@@ -123,6 +123,19 @@ function getCurrentLocation(events) {
       let temp = Math.round(response.data.main.temp);
       todayTemp.innerHTML = `${temp}°C`;
 
+      let weatherDescription = document.querySelector(
+        `#today-temp-description`
+      );
+      let description = response.data.weather[0].description;
+      weatherDescription.innerHTML = description;
+
+      let todayIcon = document.querySelector(`#today-weather-icon`);
+      todayIcon.setAttribute(
+        `src`,
+        `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      );
+      todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+
       let minTemp = document.querySelector(`#min-temp`);
       let min = Math.round(response.data.main.temp_min);
       minTemp.innerHTML = min;
