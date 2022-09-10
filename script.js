@@ -51,6 +51,11 @@ function changeLocation(event) {
 }
 
 function currentTemperature(response) {
+  celsiusTemperature = response.data.main.temp;
+  minCelsius = response.data.main.temp_min;
+  maxCelsius = response.data.main.temp_max;
+  realFeelCelsius = response.data.main.feels_like;
+
   let currentCity = document.querySelector(`#current-city`);
   let city = response.data.name;
   currentCity.innerHTML = city;
@@ -162,15 +167,15 @@ function currentTemperature(response) {
 
   let minTemp = document.querySelector(`#min-temp`);
   let min = Math.round(response.data.main.temp_min);
-  minTemp.innerHTML = min;
+  minTemp.innerHTML = `${min}°C`;
 
   let maxTemp = document.querySelector(`#max-temp`);
   let max = Math.round(response.data.main.temp_max);
-  maxTemp.innerHTML = max;
+  maxTemp.innerHTML = `${max}°C`;
 
   let realFeel = document.querySelector(`#real-feel`);
   let feelsLike = Math.round(response.data.main.feels_like);
-  realFeel.innerHTML = feelsLike;
+  realFeel.innerHTML = `${feelsLike}°C`;
 
   let humidityCard = document.querySelector(`#humidity`);
   let humidity = Math.round(response.data.main.humidity);
@@ -208,8 +213,6 @@ function search(location) {
   axios.get(apiUrl).then(currentTemperature);
 }
 
-search(`Quito`);
-
 function getCurrentLocation(events) {
   navigator.geolocation.getCurrentPosition(getPosition);
   function getPosition(position) {
@@ -223,8 +226,53 @@ function getCurrentLocation(events) {
   }
 }
 
+function showFahrenheitTemp(event) {
+  let temperatureElement = document.querySelector("#today-degrees");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = `${Math.round(fahrenheitTemp)}°F`;
+
+  let minElement = document.querySelector(`#min-temp`);
+  let minFahrenheit = (minCelsius * 9) / 5 + 32;
+  minElement.innerHTML = `${Math.round(minFahrenheit)}°F`;
+
+  let maxElement = document.querySelector(`#max-temp`);
+  let maxFahrenheit = (maxCelsius * 9) / 5 + 32;
+  maxElement.innerHTML = `${Math.round(maxFahrenheit)}°F`;
+
+  let realFeelElement = document.querySelector(`#real-feel`);
+  let feelsLikeFahrenheit = (realFeelCelsius * 9) / 5 + 32;
+  realFeelElement.innerHTML = `${Math.round(feelsLikeFahrenheit)}°F`;
+}
+
+function showCelsiusTemp(event) {
+  let temperatureElement = document.querySelector("#today-degrees");
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+
+  let minElement = document.querySelector(`#min-temp`);
+  minElement.innerHTML = `${Math.round(minCelsius)}°C`;
+
+  let maxElement = document.querySelector(`#max-temp`);
+  maxElement.innerHTML = `${Math.round(maxCelsius)}°C`;
+
+  let realFeelElement = document.querySelector(`#real-feel`);
+  realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
+}
+
 let clickCurrentLocation = document.querySelector("#current-location-button");
 clickCurrentLocation.addEventListener("click", getCurrentLocation);
 
 let searchLocation = document.querySelector("#search-form");
 searchLocation.addEventListener("submit", changeLocation);
+
+let celsiusTemperature = null;
+let minCelsius = null;
+let maxCelsius = null;
+let realFeelCelsius = null;
+
+let celsiusButton = document.querySelector(`#btnradio1`);
+celsiusButton.addEventListener(`click`, showCelsiusTemp);
+
+let fahrenheitButton = document.querySelector(`#btnradio2`);
+fahrenheitButton.addEventListener(`click`, showFahrenheitTemp);
+
+search(`Quito`);
