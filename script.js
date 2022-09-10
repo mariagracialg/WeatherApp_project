@@ -31,7 +31,9 @@ let month = months[now.getMonth()];
 
 let minutes = String(now.getMinutes()).padStart(2, `0`);
 
-let currentDate = `${day}, ${month} ${now.getDate()} at ${now.getHours()}:${minutes}`;
+let hours = String(now.getHours()).padStart(2, `0`);
+
+let currentDate = `${day}, ${month} ${now.getDate()} at ${hours}:${minutes}`;
 
 todayDate.innerHTML = currentDate;
 
