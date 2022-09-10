@@ -151,17 +151,11 @@ function currentTemperature(response) {
   }
 
   if (response.data.weather[0].icon === `50d`) {
-    todayIcon.setAttribute(
-      `src`,
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
+    todayIcon.setAttribute(`src`, `images/50d.svg`);
     todayIcon.setAttribute(`alt`, response.data.weather[0].description);
   }
   if (response.data.weather[0].icon === `50n`) {
-    todayIcon.setAttribute(
-      `src`,
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
+    todayIcon.setAttribute(`src`, `images/50n.svg`);
     todayIcon.setAttribute(`alt`, response.data.weather[0].description);
   }
 
