@@ -62,11 +62,101 @@ function currentTemperature(response) {
   weatherDescription.innerHTML = description;
 
   let todayIcon = document.querySelector(`#today-weather-icon`);
-  todayIcon.setAttribute(
-    `src`,
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+
+  if (response.data.weather[0].icon === `01d`) {
+    todayIcon.setAttribute(`src`, `images/01d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `01n`) {
+    todayIcon.setAttribute(`src`, `images/01n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `02d`) {
+    todayIcon.setAttribute(`src`, `images/02d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `02n`) {
+    todayIcon.setAttribute(`src`, `images/02n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `03d`) {
+    todayIcon.setAttribute(`src`, `images/03d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `03n`) {
+    todayIcon.setAttribute(`src`, `images/03n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `04d`) {
+    todayIcon.setAttribute(`src`, `images/04d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `04n`) {
+    todayIcon.setAttribute(`src`, `images/04n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `09d`) {
+    todayIcon.setAttribute(`src`, `images/09d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `09n`) {
+    todayIcon.setAttribute(`src`, `images/09n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `10d`) {
+    todayIcon.setAttribute(`src`, `images/10d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `10n`) {
+    todayIcon.setAttribute(`src`, `images/10n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `11d`) {
+    todayIcon.setAttribute(`src`, `images/11d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `11n`) {
+    todayIcon.setAttribute(`src`, `images/11n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `13d`) {
+    todayIcon.setAttribute(`src`, `images/13d.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `13n`) {
+    todayIcon.setAttribute(`src`, `images/13n.svg`);
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+
+  if (response.data.weather[0].icon === `50d`) {
+    todayIcon.setAttribute(
+      `src`,
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
+  if (response.data.weather[0].icon === `50n`) {
+    todayIcon.setAttribute(
+      `src`,
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
+  }
 
   let minTemp = document.querySelector(`#min-temp`);
   let min = Math.round(response.data.main.temp_min);

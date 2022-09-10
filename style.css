@@ -23,6 +23,12 @@ body {
   line-height: 1.5;
   margin-top: 20px;
 }
+
+#today-weather-icon {
+  margin-top: -50px;
+  margin-bottom: -30px;
+}
+
 .today-weather-info {
   margin-top: 50px;
 }
