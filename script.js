@@ -1,42 +1,3 @@
-let now = new Date();
-
-let todayDate = document.querySelector("#today-date");
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
-
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-let month = months[now.getMonth()];
-
-let minutes = String(now.getMinutes()).padStart(2, `0`);
-
-let hours = String(now.getHours()).padStart(2, `0`);
-
-let currentDate = `${day}, ${month} ${now.getDate()} at ${hours}:${minutes}`;
-
-todayDate.innerHTML = currentDate;
-
 function changeLocation(event) {
   event.preventDefault();
   let locationInput = document.querySelector("#search-box");
@@ -51,10 +12,54 @@ function changeLocation(event) {
 }
 
 function currentTemperature(response) {
+  let localDate = new Date();
+  let localOffset = localDate.getTimezoneOffset() * 60000;
+
   celsiusTemperature = response.data.main.temp;
   minCelsius = response.data.main.temp_min;
   maxCelsius = response.data.main.temp_max;
   realFeelCelsius = response.data.main.feels_like;
+
+  let timeUnix = response.data.dt * 1000;
+  let timeUTC = timeUnix + localOffset;
+  let time = new Date(timeUTC + 1000 * response.data.timezone);
+
+  let todayDate = document.querySelector("#today-date");
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[time.getDay()];
+
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[time.getMonth()];
+
+  let minutes = String(time.getMinutes()).padStart(2, `0`);
+
+  let hours = String(time.getHours()).padStart(2, `0`);
+
+  let currentDate = `${day}, ${month} ${time.getDate()} at ${hours}:${minutes}`;
+
+  todayDate.innerHTML = currentDate;
 
   let currentCity = document.querySelector(`#current-city`);
   let city = response.data.name;
@@ -180,21 +185,21 @@ function currentTemperature(response) {
   windSpeedCard.innerHTML = windSpeed;
 
   let sunriseCard = document.querySelector(`#sunrise`);
-  let sunriseUnix = response.data.sys.sunrise;
-  let sunriseTime = new Date(sunriseUnix * 1000);
+  let sunriseUnix = response.data.sys.sunrise * 1000;
+  let sunriseUTC = sunriseUnix + localOffset;
+  let sunriseTime = new Date(sunriseUTC + 1000 * response.data.timezone);
   let sunriseHours = String(sunriseTime.getHours()).padStart(2, `0`);
   let sunriseMinutes = String(sunriseTime.getMinutes()).padStart(2, `0`);
-  let sunriseSeconds = String(sunriseTime.getSeconds()).padStart(2, `0`);
-  let sunrise = `${sunriseHours}:${sunriseMinutes}:${sunriseSeconds}`;
+  let sunrise = `${sunriseHours}:${sunriseMinutes}`;
   sunriseCard.innerHTML = sunrise;
 
   let sunsetCard = document.querySelector(`#sunset`);
-  let sunsetUnix = response.data.sys.sunset;
-  let sunsetTime = new Date(sunsetUnix * 1000);
+  let sunsetUnix = response.data.sys.sunset * 1000;
+  let sunsetUTC = sunsetUnix + localOffset;
+  let sunsetTime = new Date(sunsetUTC + 1000 * response.data.timezone);
   let sunsetHours = String(sunsetTime.getHours()).padStart(2, `0`);
   let sunsetMinutes = String(sunsetTime.getMinutes()).padStart(2, `0`);
-  let sunsetSeconds = String(sunsetTime.getSeconds()).padStart(2, `0`);
-  let sunset = `${sunsetHours}:${sunsetMinutes}:${sunsetSeconds}`;
+  let sunset = `${sunsetHours}:${sunsetMinutes}`;
   sunsetCard.innerHTML = sunset;
 
   console.log(response);
@@ -269,4 +274,4 @@ celsiusButton.addEventListener(`click`, showCelsiusTemp);
 let fahrenheitButton = document.querySelector(`#btnradio2`);
 fahrenheitButton.addEventListener(`click`, showFahrenheitTemp);
 
-search(`Quito`);
+search(`Guayaquil`);
