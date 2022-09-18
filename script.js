@@ -149,38 +149,6 @@ function getCurrentLocation(events) {
   }
 }
 
-function showFahrenheitTemp(event) {
-  let temperatureElement = document.querySelector("#today-degrees");
-  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = `${Math.round(fahrenheitTemp)}°F`;
-
-  let minElement = document.querySelector(`#min-temp`);
-  let minFahrenheit = (minCelsius * 9) / 5 + 32;
-  minElement.innerHTML = `${Math.round(minFahrenheit)}°F`;
-
-  let maxElement = document.querySelector(`#max-temp`);
-  let maxFahrenheit = (maxCelsius * 9) / 5 + 32;
-  maxElement.innerHTML = `${Math.round(maxFahrenheit)}°F`;
-
-  let realFeelElement = document.querySelector(`#real-feel`);
-  let feelsLikeFahrenheit = (realFeelCelsius * 9) / 5 + 32;
-  realFeelElement.innerHTML = `${Math.round(feelsLikeFahrenheit)}°F`;
-}
-
-function showCelsiusTemp(event) {
-  let temperatureElement = document.querySelector("#today-degrees");
-  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
-
-  let minElement = document.querySelector(`#min-temp`);
-  minElement.innerHTML = `${Math.round(minCelsius)}°C`;
-
-  let maxElement = document.querySelector(`#max-temp`);
-  maxElement.innerHTML = `${Math.round(maxCelsius)}°C`;
-
-  let realFeelElement = document.querySelector(`#real-feel`);
-  realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
-}
-
 function formatDate(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -212,9 +180,9 @@ function displayForecast(response) {
                         />
                         <hr />
                         <p class="card-text weather-temp">
-                          ${Math.round(
+                          <span id="forecast-max-temp">${Math.round(
                             forecastDay.temp.max
-                          )}°C| <span class="forecast-min-temp">${Math.round(
+                          )}°C</span> | <span id="forecast-min-temp">${Math.round(
           forecastDay.temp.min
         )}°C</span>
                         </p>
@@ -232,6 +200,38 @@ function displayForecast(response) {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function showFahrenheitTemp(event) {
+  let temperatureElement = document.querySelector("#today-degrees");
+  let fahrenheitTemp = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = `${Math.round(fahrenheitTemp)}°F`;
+
+  let minElement = document.querySelector(`#min-temp`);
+  let minFahrenheit = (minCelsius * 9) / 5 + 32;
+  minElement.innerHTML = `${Math.round(minFahrenheit)}°F`;
+
+  let maxElement = document.querySelector(`#max-temp`);
+  let maxFahrenheit = (maxCelsius * 9) / 5 + 32;
+  maxElement.innerHTML = `${Math.round(maxFahrenheit)}°F`;
+
+  let realFeelElement = document.querySelector(`#real-feel`);
+  let feelsLikeFahrenheit = (realFeelCelsius * 9) / 5 + 32;
+  realFeelElement.innerHTML = `${Math.round(feelsLikeFahrenheit)}°F`;
+}
+
+function showCelsiusTemp(event) {
+  let temperatureElement = document.querySelector("#today-degrees");
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+
+  let minElement = document.querySelector(`#min-temp`);
+  minElement.innerHTML = `${Math.round(minCelsius)}°C`;
+
+  let maxElement = document.querySelector(`#max-temp`);
+  maxElement.innerHTML = `${Math.round(maxCelsius)}°C`;
+
+  let realFeelElement = document.querySelector(`#real-feel`);
+  realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
 }
 
 let clickCurrentLocation = document.querySelector("#current-location-button");
