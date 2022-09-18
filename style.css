@@ -53,12 +53,16 @@ body {
   font-size: 40px;
 }
 .weeks-title {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 10px;
 }
 .weeks-day {
   text-align: center;
   margin-top: 10px;
+}
+#forecast-icon {
+  margin-bottom: -20px;
+  margin-top: -10px;
 }
 .weather-temp {
   font-size: 14px;

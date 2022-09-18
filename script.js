@@ -15,7 +15,7 @@ function getForecast(coordinates) {
   console.log(coordinates);
   let lat = coordinates.lat;
   let lon = coordinates.lon;
-  let apiKey = `a43564c91a6c605aeb564c9ed02e3858`;
+  let apiKey = `99b8f9330a1bfba3a85e523fd3c2e528`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayForecast);
@@ -84,95 +84,8 @@ function currentTemperature(response) {
   weatherDescription.innerHTML = description;
 
   let todayIcon = document.querySelector(`#today-weather-icon`);
-
-  if (response.data.weather[0].icon === `01d`) {
-    todayIcon.setAttribute(`src`, `images/01d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `01n`) {
-    todayIcon.setAttribute(`src`, `images/01n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `02d`) {
-    todayIcon.setAttribute(`src`, `images/02d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `02n`) {
-    todayIcon.setAttribute(`src`, `images/02n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `03d`) {
-    todayIcon.setAttribute(`src`, `images/03d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `03n`) {
-    todayIcon.setAttribute(`src`, `images/03n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `04d`) {
-    todayIcon.setAttribute(`src`, `images/04d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `04n`) {
-    todayIcon.setAttribute(`src`, `images/04n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `09d`) {
-    todayIcon.setAttribute(`src`, `images/09d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `09n`) {
-    todayIcon.setAttribute(`src`, `images/09n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `10d`) {
-    todayIcon.setAttribute(`src`, `images/10d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `10n`) {
-    todayIcon.setAttribute(`src`, `images/10n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `11d`) {
-    todayIcon.setAttribute(`src`, `images/11d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `11n`) {
-    todayIcon.setAttribute(`src`, `images/11n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `13d`) {
-    todayIcon.setAttribute(`src`, `images/13d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `13n`) {
-    todayIcon.setAttribute(`src`, `images/13n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-
-  if (response.data.weather[0].icon === `50d`) {
-    todayIcon.setAttribute(`src`, `images/50d.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
-  if (response.data.weather[0].icon === `50n`) {
-    todayIcon.setAttribute(`src`, `images/50n.svg`);
-    todayIcon.setAttribute(`alt`, response.data.weather[0].description);
-  }
+  todayIcon.setAttribute(`src`, `images/${response.data.weather[0].icon}.svg`);
+  todayIcon.setAttribute(`alt`, response.data.weather[0].description);
 
   let minTemp = document.querySelector(`#min-temp`);
   let min = Math.round(response.data.main.temp_min);
@@ -268,35 +181,55 @@ function showCelsiusTemp(event) {
   realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
 }
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+  return day;
+}
+
 function displayForecast(response) {
-  console.log(response.data);
+  console.log(response.data.daily);
+
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector(`#forecast`);
-  let days = [`Mon`, `Tue`, `Wed`, `Thu`, `Fri`];
+
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-sm">
+  forecast.forEach(function (forecastDay, index) {
+    if (index > 0 && index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-sm">
                   <div class="card-body">
                     <div class="card text-center">
                       <div class="card-body">
                         <img
-                          src="images/cloudy-weather.svg"
-                          alt="cloudy icon"
-                          width="50%"
+                          src="images/${forecastDay.weather[0].icon}.svg"
+                          alt="forecast-icon"
+                          width="75%"
+                          id = "forecast-icon"
                         />
                         <hr />
                         <p class="card-text weather-temp">
-                          32°C | <span class="forecast-min-temp">21°C</span>
+                          ${Math.round(
+                            forecastDay.temp.max
+                          )}°C| <span class="forecast-min-temp">${Math.round(
+          forecastDay.temp.min
+        )}°C</span>
                         </p>
                       </div>
                     </div>
                     <p class="card-text weeks-day">
-                      <small class="text-muted">${day}</small>
+                      <small class="text-muted">${formatDate(
+                        forecastDay.dt
+                      )}</small>
                     </p>
                   </div>
                 </div>`;
+    }
   });
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
