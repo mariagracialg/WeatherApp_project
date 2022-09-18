@@ -257,6 +257,38 @@ function showCelsiusTemp(event) {
   realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector(`#forecast`);
+  let days = [`Mon`, `Tue`, `Wed`, `Thu`, `Fri`];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-sm">
+                  <div class="card-body">
+                    <div class="card text-center">
+                      <div class="card-body">
+                        <img
+                          src="images/cloudy-weather.svg"
+                          alt="cloudy icon"
+                          width="50%"
+                        />
+                        <hr />
+                        <p class="card-text weather-temp">
+                          32°C | <span class="forecast-min-temp">21°C</span>
+                        </p>
+                      </div>
+                    </div>
+                    <p class="card-text weeks-day">
+                      <small class="text-muted">${day}</small>
+                    </p>
+                  </div>
+                </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 let clickCurrentLocation = document.querySelector("#current-location-button");
 clickCurrentLocation.addEventListener("click", getCurrentLocation);
 
@@ -274,4 +306,5 @@ celsiusButton.addEventListener(`click`, showCelsiusTemp);
 let fahrenheitButton = document.querySelector(`#btnradio2`);
 fahrenheitButton.addEventListener(`click`, showFahrenheitTemp);
 
+displayForecast();
 search(`Guayaquil`);
