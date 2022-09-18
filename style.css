@@ -71,6 +71,16 @@ body {
 .forecast-min-temp {
   color: #70757a;
 }
+#disclaimer {
+  font-size: 12px;
+}
+
+#forecast-footer {
+  text-align: right;
+  font-size: 12px;
+  padding-right: 25px;
+  margin-bottom: 5px;
+}
 .weather-fact {
   font-size: 20px;
 }
