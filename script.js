@@ -11,6 +11,16 @@ function changeLocation(event) {
   axios.get(apiUrl).then(currentTemperature);
 }
 
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let lat = coordinates.lat;
+  let lon = coordinates.lon;
+  let apiKey = `a43564c91a6c605aeb564c9ed02e3858`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function currentTemperature(response) {
   let localDate = new Date();
   let localOffset = localDate.getTimezoneOffset() * 60000;
@@ -202,6 +212,7 @@ function currentTemperature(response) {
   let sunset = `${sunsetHours}:${sunsetMinutes}`;
   sunsetCard.innerHTML = sunset;
 
+  getForecast(response.data.coord);
   console.log(response);
 }
 
@@ -257,7 +268,8 @@ function showCelsiusTemp(event) {
   realFeelElement.innerHTML = `${Math.round(realFeelCelsius)}°C`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data);
   let forecastElement = document.querySelector(`#forecast`);
   let days = [`Mon`, `Tue`, `Wed`, `Thu`, `Fri`];
   let forecastHTML = `<div class="row">`;
@@ -306,5 +318,4 @@ celsiusButton.addEventListener(`click`, showCelsiusTemp);
 let fahrenheitButton = document.querySelector(`#btnradio2`);
 fahrenheitButton.addEventListener(`click`, showFahrenheitTemp);
 
-displayForecast();
 search(`Guayaquil`);
