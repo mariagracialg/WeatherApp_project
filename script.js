@@ -8,6 +8,8 @@ function changeLocation(event) {
   let apiKey = `33ff0888d56d2589acf1d714577ae3c1`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=${units}`;
 
+  celsiusButton.checked = true;
+
   axios.get(apiUrl).then(currentTemperature);
 }
 
@@ -146,6 +148,8 @@ function getCurrentLocation(events) {
     let apiUrlCurrentLocation = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
     axios.get(apiUrlCurrentLocation).then(currentTemperature);
+
+    celsiusButton.checked = true;
   }
 }
 
