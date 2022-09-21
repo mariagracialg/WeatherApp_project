@@ -44,10 +44,10 @@ body {
   margin-top: 15px;
 }
 .today-min {
-  text-align: right;
+  text-align: left;
 }
 .today-max {
-  text-align: left;
+  text-align: right;
 }
 .weather-icon {
   font-size: 40px;
@@ -68,8 +68,9 @@ body {
   font-size: 14px;
   color: rgb(24, 24, 24);
 }
-.forecast-min-temp {
+#forecast-min-temp {
   color: #70757a;
+  font-weight: 300;
 }
 #disclaimer {
   font-size: 12px;
